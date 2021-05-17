@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd  http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+    <http:listener-config name="immun-history-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="8081" />
+    </http:listener-config>
+    <apikit:config name="immun-history-config" api="immun-history.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <flow name="pf-router">
+        <http:listener config-ref="immun-history-httpListenerConfig" path="/api/*">
+            <http:response statusCode="#[vars.httpStatus default 200]">
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:response>
+            <http:error-response statusCode="#[vars.httpStatus default 500]">
+                <http:body>#[payload]</http:body>
+                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+            </http:error-response>
+        </http:listener>
+        <flow-ref doc:name="sf-common-config" doc:id="fcdbdea5-580a-400b-91b7-3439dca75cd4" name="sf-common-config" />
+        <apikit:router config-ref="immun-history-config" />
+        <error-handler ref="api-exception-handler" />
+    </flow>
+    
+    <sub-flow name="sf-common-config" doc:id="927d3715-e3ce-4b85-9eff-2cd93182dc86">
+        <ee:transform doc:name="common config" doc:id="10e529b3-9411-49ef-8781-1b44069d32c9">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+            </ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="x-transaction-id" ><![CDATA[%dw 2.0
+output application/java
+---
+if (attributes.headers.'x-transaction-id' != null) attributes.headers.'x-transaction-id' else uuid()]]></ee:set-variable>
+				<ee:set-variable variableName="consumer" ><![CDATA[%dw 2.0
+output application/java
+---
+if (authentication.properties.clientName != null) authentication.properties.clientName else ""]]></ee:set-variable>
+				<ee:set-variable variableName="resource" ><![CDATA[%dw 2.0
+output application/java
+---
+attributes.requestPath]]></ee:set-variable>
+				<ee:set-variable variableName="tracepoint" ><![CDATA[%dw 2.0
+output application/java
+---
+p('app.name') ++ "-start"]]></ee:set-variable>
+				<ee:set-variable variableName="starttime" ><![CDATA[%dw 2.0
+output application/java
+---
+now() as Number {unit: "milliseconds"}]]></ee:set-variable>
+			</ee:variables>
+        </ee:transform>
+		<flow-ref doc:name="INFO Logger" doc:id="463cd4a7-2820-4ae3-adba-71ce0e3be4b6" name="sf-logger"/>
+    </sub-flow>
+    <flow name="post:\immunization\history:application\json:immun-history-config">
+        <flow-ref doc:name="sf-delvax-innunhistory" doc:id="2c5ede09-3120-41f2-9d92-4d78aa7af262" name="sf-delvax-innunhistory" />
+    </flow>
+</mule>

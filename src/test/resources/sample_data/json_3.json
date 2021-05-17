@@ -1,0 +1,268 @@
+{
+  "Delimiters": "|^~\\&",
+  "Errors": [
+    {
+      "errorType": {
+        
+      },
+      "errorCode": "102",
+      "fatal": false,
+      "errorText": "invalid character",
+      "segment": 2
+    },
+    {
+      "errorType": {
+        
+      },
+      "errorCode": "102",
+      "fatal": false,
+      "errorText": "too many values present",
+      "segment": 2
+    }
+  ],
+  "MSH": {
+    "MSH-10": "DE000020210414074936",
+    "MSH-21": [
+      {
+        "EI-01": "Z33",
+        "EI-02": "CDCPHINVS"
+      }
+    ],
+    "MSH-11": {
+      "PT-01": "T"
+    },
+    "MSH-12": {
+      "VID-01": "2.5.1"
+    },
+    "MSH-03": {
+      "HD-01": "WebIZ.21.3.1.0"
+    },
+    "MSH-04": {
+      "HD-01": "DE0000"
+    },
+    "MSH-15": "NE",
+    "MSH-05": {
+      "HD-01": "CONTACT TRACERS"
+    },
+    "MSH-16": "NE",
+    "MSH-06": {
+      "HD-01": "DE1301"
+    },
+    "MSH-07": {
+      "TS-01": "2021-04-14T12:07:49-04:00"
+    },
+    "MSH-09": {
+      "MSG-03": "RSP_K11",
+      "MSG-02": "K11",
+      "MSG-01": "RSP"
+    }
+  },
+  "ACK": {
+    "MSH": {
+      "MSH-05": {
+        "HD-01": "WebIZ.21.3.1.0"
+      },
+      "MSH-16": "NE",
+      "MSH-06": {
+        "HD-01": "DE0000"
+      },
+      "MSH-07": {
+        "TS-01": "2021-04-14T12:07:49-04:00"
+      },
+      "MSH-09": {
+        "MSG-03": "ACK",
+        "MSG-02": "K11",
+        "MSG-01": "ACK"
+      },
+      "MSH-10": "DE000020210414074936",
+      "MSH-21": [
+        {
+          "EI-01": "Z33",
+          "EI-02": "CDCPHINVS"
+        }
+      ],
+      "MSH-11": {
+        "PT-01": "T"
+      },
+      "MSH-12": {
+        "VID-01": "2.5.1"
+      },
+      "MSH-03": {
+        "HD-01": "CONTACT TRACERS"
+      },
+      "MSH-04": {
+        "HD-01": "DE1301"
+      },
+      "MSH-15": "NE"
+    },
+    "ERR": [
+      {
+        "ERR-01": [
+          {
+            "ELD-04": {
+              "CE-01": "102",
+              "CE-02": "Data type error",
+              "CE-03": "HL70357"
+            },
+            "ELD-01": "QPD",
+            "ELD-02": 1,
+            "ELD-03": 6
+          }
+        ]
+      },
+      {
+        "ERR-01": [
+          {
+            "ELD-04": {
+              "CE-01": "102",
+              "CE-02": "Data type error",
+              "CE-03": "HL70357"
+            },
+            "ELD-01": "QPD",
+            "ELD-02": 1,
+            "ELD-03": 6
+          }
+        ]
+      },
+      {
+        "ERR-01": [
+          {
+            "ELD-04": {
+              "CE-01": "102",
+              "CE-02": "Data type error",
+              "CE-03": "HL70357"
+            },
+            "ELD-01": "ZSA",
+            "ELD-02": 1,
+            "ELD-03": 2
+          }
+        ]
+      }
+    ],
+    "MSA": {
+      "MSA-02": "DE000020210414074936",
+      "MSA-01": "AE"
+    }
+  },
+  "Data": {
+    "RSP_K11": {
+      "MSH": {
+        "MSH-10": "DE000020210414074936",
+        "MSH-21": [
+          {
+            "EI-01": "Z33",
+            "EI-02": "CDCPHINVS"
+          }
+        ],
+        "MSH-11": {
+          "PT-01": "T"
+        },
+        "MSH-12": {
+          "VID-01": "2.5.1"
+        },
+        "MSH-03": {
+          "HD-01": "WebIZ.21.3.1.0"
+        },
+        "MSH-04": {
+          "HD-01": "DE0000"
+        },
+        "MSH-15": "NE",
+        "MSH-05": {
+          "HD-01": "CONTACT TRACERS"
+        },
+        "MSH-16": "NE",
+        "MSH-06": {
+          "HD-01": "DE1301"
+        },
+        "MSH-07": {
+          "TS-01": "2021-04-14T12:07:49-04:00"
+        },
+        "MSH-09": {
+          "MSG-03": "RSP_K11",
+          "MSG-02": "K11",
+          "MSG-01": "RSP"
+        }
+      },
+      "ERR": {
+        "ERR-08": "Internal Parser Error: Field too short: 2 < 4,  Next Message: QPD-6 (DateTimeOfBirth): Unrecognized/unsupported value [01].  Value will not load.  Expectation: value must be one of the following: (is null or empty or is a valid date and is formatted like (YYYY[MM[DD[HHMM[SS[.S[S[S[S]]]]]]]][+/-ZZZZ])).",
+        "ERR-07": "NumericPath: QPD[1].6[1].1.1, NamePath: QPD/DateTimeOfBirth/Time/Year, RuleId: , ApplicationErrorCode: WEBIZ-501,  Next Diagnostic: NumericPath: QPD[1].6[1].1, NamePath: QPD/DateTimeOfBirth/Time, RuleId: 2, ApplicationErrorCode: WEBIZ-720",
+        "ERR-05": {
+          "CWE-02": "Illogical Value error",
+          "CWE-03": "HL70533",
+          "CWE-01": "3",
+          "CWE-06": "L",
+          "CWE-04": "WEBIZ-501",
+          "CWE-05": "Internal Parser Conformance Violation Occured"
+        },
+        "ERR-04": "W",
+        "ERR-03": {
+          "CWE-02": "ApplicationError",
+          "CWE-03": "HL70357",
+          "CWE-01": "999"
+        },
+        "ERR-02": [
+          {
+            "ERL-06": 1,
+            "ERL-03": 6,
+            "ERL-02": 1,
+            "ERL-05": 1,
+            "ERL-04": 1,
+            "ERL-01": "QPD"
+          },
+          {
+            "ERL-03": 6,
+            "ERL-02": 1,
+            "ERL-05": 1,
+            "ERL-04": 1,
+            "ERL-01": "QPD"
+          }
+        ]
+      },
+      "QPD": {
+        "QPD-07": "M",
+        "QPD-06": {
+          "TS-01": "0100-01-01T00:00:00-07:28:18"
+        },
+        "QPD-04": {
+          "XPN-02": "Tester",
+          "XPN-01": "Testerman"
+        },
+        "QPD-02": "12345",
+        "QPD-01": {
+          "CE-01": "Z34",
+          "CE-02": "Request Immunization History",
+          "CE-03": "HL70471"
+        }
+      },
+      "ZSA": {
+        "ZSA-01": {
+          "CE-01": "AW",
+          "CE-02": "Application Warning - One or more ERR segments returned with at most a severity of W for Warning",
+          "CE-03": "ENV0008"
+        },
+        "ZSA-02": {
+          "CX-01": "4814003",
+          "CX-04": {
+            "HD-01": "DE0000"
+          },
+          "CX-05": "HL7LogIdIncomming"
+        }
+      },
+      "MSA": {
+        "MSA-02": "1111908",
+        "MSA-01": "AE"
+      },
+      "QAK": {
+        "QAK-03": {
+          "CE-01": "Z34",
+          "CE-02": "Request Immunization History",
+          "CE-03": "HL70471"
+        },
+        "QAK-02": "AE",
+        "QAK-01": "12345"
+      }
+    }
+  },
+  "Id": "RSP_K11",
+  "Name": "RSP_K11"
+}

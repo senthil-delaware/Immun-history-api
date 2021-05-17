@@ -1,0 +1,16 @@
+6config-filename: "dev.yaml"
+
+api:
+  id: "16758372"
+app:
+  name: "sf-delvax-immunhistory"
+  
+mule:
+  key: "123456"
+  
+delvax:
+  ws:
+    username: "HL7EMR.DPH"
+    password: "Publiche6#"
+    facilityid: "DE1301"
+    endpoint: "https://delvax-qa.dhss.delaware.gov/HL7EngineAuthentication_QA/Service.asmx"

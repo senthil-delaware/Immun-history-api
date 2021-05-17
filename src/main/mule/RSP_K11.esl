@@ -1,0 +1,31 @@
+form: HL7
+version: '2.5.1'
+imports: [ 'basedefs.esl' ]
+id: 'RSP_K11'
+name: 'RSP_K11'
+data: 
+- { idRef: 'MSH', position: '01', usage: M }
+- { idRef: 'SFT', position: '02', usage: O, count: '>1' }
+- { idRef: 'MSA', position: '03', usage: M }
+- { idRef: 'ERR', position: '04', usage: O }
+- { idRef: 'QAK', position: '05', usage: M }
+- { idRef: 'QPD', position: '06', usage: M }
+- groupId: 'Patient Identifier'
+  count: '>1'
+  usage: O
+  items: 
+  - { idRef: 'PID', position: '07', usage: O }
+  - { idRef: 'PD1', position: '08', usage: O }
+  - { idRef: 'PV1', position: '09', usage: O }
+  - groupId: 'Immunization'
+    count: '>1'
+    usage: O
+    items: 
+    - { idRef: 'ORC', position: '11', usage: O }
+    - { idRef: 'RXA', position: '12', usage: O }
+    - { idRef: 'RXR', position: '13', usage: O }
+    - { idRef: 'OBX', position: '14', usage: O, count: '>1'  }
+  - { idRef: 'RDF', position: '16', usage: O }
+  - { idRef: 'RDT', position: '17', usage: O, count: '>1' }
+- { idRef: 'DSC', position: '20', usage: O }
+- { idRef: 'ZSA', position: '21', usage: O}

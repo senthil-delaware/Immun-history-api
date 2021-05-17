@@ -1,0 +1,19 @@
+{
+  "sampleData": {
+    "14fb4858-8d4d-478f-8a23-fcee75cc2d70": {
+      "payload": "sample_data/json.json"
+    },
+    "2452b515-08b1-4f69-b975-a2a86a2c649a": {
+      "payload": "sample_data/hl7.dwl"
+    },
+    "a85f41ef-ddf7-443b-ae88-11205f825998": {
+      "payload": "sample_data/json_1.json"
+    },
+    "9699ec5b-70f2-4a33-8921-b3050329a972": {
+      "payload": "sample_data/json_2.json"
+    },
+    "13547f06-d25d-4824-8bb2-ff89bdcdfca8": {
+      "payload": "sample_data/json_3.json"
+    }
+  }
+}

@@ -1,0 +1,69 @@
+#%RAML 1.0
+title: Immun-history
+version: v1
+protocols: [HTTP]
+mediaType: application/json
+
+types:
+  immunizationHistoryRequest: !include DataTypes/ImmunizationHistoryRequest.raml
+  
+securitySchemes:
+  clientCredentials:
+    type: x-client-credentials
+    description: Use application client_id and secret assigned by API administrator.
+  basic:
+    type: Basic Authentication
+    description: Basic Authentication
+    
+securedBy: basic
+
+traits:
+  content-type-required:
+      headers:
+        content-type:
+          type: string
+          example: application/json
+  transactionid-required:
+      headers:
+         x-transaction-id:
+          type: string
+          example: e3945d7f-6394-4f69-8a2d-267b7a9d5eb5     
+  client-credentials-required:
+      headers:
+        client_id:
+          type: string
+          example: 7b404180fbb84b099179a4126a9576ff
+        client_secret:
+          type: string
+          example: e241f4aa3eca4b2a8FA67A2FEF5754F8
+  standard-error-responses:
+      responses:
+        400:
+          description:
+            The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax,               invalid request message framing, or deceptive request routing).
+          body:
+            application/json:
+        405:
+          description:
+            A request was made of a resource using a request method not supported by that resource; for example, using GET on a form which requires data            to be presented via POST, or using PUT on a read-only resource.
+          body:
+            application/json:
+        500:
+          description:
+            That went badly, check to see if there is an x-implementation-status-code header value returned from the API implementation.
+          body:
+            application/json:
+
+/immunization:
+  /history:
+    description: API to retreive the patients Immunization history details from DelVax
+    is: [content-type-required, transactionid-required]
+    post:
+      body:
+        application/json:
+          example:
+            
+      responses:
+        200:
+          body:
+            application/json:

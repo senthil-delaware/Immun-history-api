@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="sf-logger" doc:id="61083d73-ad21-4c62-8173-7ed35c1bed33" >
+		<ee:transform doc:name="Transform Log payload" doc:id="7c8af9f6-e1f5-4f86-9e07-0b463fa232b8" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="infoLogger" ><![CDATA[%dw 2.0
+output application/json skipNullOn="everywhere"
+---
+{
+	timeStamp: now(),
+	eventType: "INFO",
+	transacionId: vars.'x-transaction-id',
+	apiName: p('app.name'),
+	environment: p('mule.env'),
+	consumer: vars.consumer,
+	processName: vars.resource,
+	tracePoint: vars.tracepoint,
+	elapsedTime: if (vars.tracepoint contains "end") ((now() as Number {unit: "milliseconds"}) - vars."starttime") else null
+}]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="29f98bc9-413b-471b-a2de-6a3eda1d2840" message="#[vars.infoLogger]"/>
+	</sub-flow>
+</mule>

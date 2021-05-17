@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:hl7="http://www.mulesoft.org/schema/mule/hl7"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/hl7 http://www.mulesoft.org/schema/mule/hl7/current/mule-hl7.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
+	
+	<sub-flow name="sf-delvax-innunhistory" doc:id="ff725699-9a99-4d02-86d3-c55031e5abd2" >
+		<flow-ref doc:name="sf-transform-and-generate-QBP-HL7" doc:id="bb9c4f69-0a13-4d13-9afc-5f50bb7d7f33" name="sf-transform-and-generate-QBP-HL7"/>
+		<flow-ref doc:name="sf-invoke-delvax" doc:id="62012d89-b794-4a69-8305-f510781997e3" name="sf-invoke-delvax"/>
+	</sub-flow>
+	<sub-flow name="sf-transform-and-generate-QBP-HL7" doc:id="dc920135-2e62-4203-873f-7d648164a35c" >
+		<logger level="DEBUG" doc:name="DEBUG Logger" doc:id="c87e9a14-ca7a-457c-a859-18aacbcf0f8a" message="Request Payload received -&gt; #[payload]" category="level3"/>
+		<ee:transform doc:name="JSON-to-QBP" doc:id="14fb4858-8d4d-478f-8a23-fcee75cc2d70">
+			<ee:message>
+				<ee:set-payload resource="dataweave/json-to-qbpdwl.dwl" />
+			</ee:message>
+		</ee:transform>
+		<hl7:write doc:name="Write" doc:id="a67d8bed-5bda-4bb7-9c5f-1f1481c42c41" config-ref="HL7_Write_QBP_Q11_Config" />
+	</sub-flow>
+	<sub-flow name="sf-invoke-delvax" doc:id="e0c714ed-55aa-42c3-b4ac-35b4507ac789" >
+		<ee:transform doc:name="Transform-to-SOAP-XML" doc:id="9699ec5b-70f2-4a33-8921-b3050329a972" >
+			<ee:message >
+				<ee:set-payload resource="dataweave/HL7-to-SOAP-XML.dwl" />
+			</ee:message>
+		</ee:transform>
+		<logger level="DEBUG" doc:name="DEBUG Logger" doc:id="08bcee37-4dd0-4242-bd8c-2baa3ccf5fa9" message="Transformed HL7 Message posted to DelVax -&gt; #[payload]" category="level3"/>
+		<until-successful maxRetries="3" doc:name="Until Successful" doc:id="090c6211-107c-4dee-b77e-487b0bf3aed8" millisBetweenRetries="30000">
+			<wsc:consume operation="submitSingleMessage" doc:name="Invoke DelVax" doc:id="89cad26c-2438-48d6-b136-78d124bc7f08" config-ref="DelVax_WSC_Config" />
+		</until-successful>
+		<ee:transform doc:name="Get HL7 from SOAP Response" doc:id="23c4c3f9-d064-410c-9b48-d2231f21656e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+ns ns0 http://tempuri.org/
+output text/plain
+---
+payload.body.ns0#submitSingleMessageResponse.ns0#submitSingleMessageResult]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<hl7:read doc:name="Read" doc:id="9ab12485-bc65-402f-895e-281de1a4c7f2" config-ref="HL7_Read_RSP_K11_Config"/>
+		<ee:transform doc:name="Transform Message" doc:id="a85f41ef-ddf7-443b-ae88-11205f825998" >
+			<ee:message >
+				<ee:set-payload resource="dataweave/rsp_k11-to-json.dwl" />
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="tracepoint" ><![CDATA[%dw 2.0
+output application/java
+---
+p('app.name') ++ "-end"]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<logger level="DEBUG" doc:name="DEBUG Logger" doc:id="9a1cc3cc-bf12-4bed-aaf4-43c228de44e5" message="HL7 Response received form Delvax -&gt; #[payload]" category="level3"/>
+		<flow-ref doc:name="INFO Logger" doc:id="7d3722af-c712-4b24-84ea-9eab729b2e2a" name="sf-logger"/>
+		
+	</sub-flow>
+</mule>

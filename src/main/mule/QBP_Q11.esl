@@ -1,0 +1,11 @@
+form: HL7
+version: '2.5.1'
+imports: [ 'basedefs.esl' ]
+id: 'QBP_Q11'
+name: 'QBP_Q11'
+data: 
+- { idRef: 'MSH', position: '01', usage: M }
+- { idRef: 'SFT', position: '02', usage: O, count: '>1' }
+- { idRef: 'QPD', position: '03', usage: M }
+- { idRef: 'RCP', position: '04', usage: M }
+- { idRef: 'DSC', position: '05', usage: O }

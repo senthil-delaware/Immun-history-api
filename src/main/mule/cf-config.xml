@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:hl7="http://www.mulesoft.org/schema/mule/hl7" xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd
+http://www.mulesoft.org/schema/mule/hl7 http://www.mulesoft.org/schema/mule/hl7/current/mule-hl7.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	
+	<hl7:config name="HL7_Write_QBP_Q11_Config" doc:name="HL7 EDI Config" doc:id="a7212557-8bb0-4a06-9b6d-7e1c2abbcd5b" appNamespaceIdSelf="DE9999" appUniversalIdSelf="DE9999" appUniversalIdTypeSelf="DE9999" appNamespaceIdPartner="DE9999" appUniversalIdPartner="DE9999" appUniversalIdTypePartner="DE9999" subcompSeparator="&amp;">
+		<hl7:schemas >
+			<hl7:schema value="${app.home}/QBP_Q11.esl" />
+		</hl7:schemas>
+	</hl7:config>
+	<hl7:config name="HL7_Read_RSP_K11_Config" doc:name="HL7 EDI Config" doc:id="cc7cf1f1-40e2-40f4-a51c-8e6796cc90de" appNamespaceIdSelf="DE0000" appUniversalIdSelf="DE0000" appUniversalIdTypeSelf="DE0000" appNamespaceIdPartner="DE0000" appUniversalIdPartner="DE0000" appUniversalIdTypePartner="DE0000" parserSegmentTerminator="LF">
+		<hl7:schemas >
+			<hl7:schema value="${app.home}/RSP_K11.esl" />
+		</hl7:schemas>
+	</hl7:config>
+	<wsc:config name="DelVax_WSC_Config" doc:name="Web Service Consumer Config" doc:id="ef217517-1c3c-443e-9917-853440e5b22a" >
+		<wsc:connection wsdlLocation="HL7_Service.wsdl" service="Service" port="ServiceSoap" address="${delvax.ws.endpoint}" >
+			<wsc:custom-transport-configuration >
+				<wsc:default-http-transport-configuration timeout="30000" />
+			</wsc:custom-transport-configuration>
+			<wsc:web-service-security actor="http://schemas.xmlsoap.org/soap/actor/next" />
+		</wsc:connection>
+	</wsc:config>
+	<global-property doc:name="Global Property" doc:id="d3f0d719-f04c-4ff1-abf7-ccba146015cb" name="mule.env" value="dev" />
+	<global-property doc:name="Global Property" doc:id="ece346e3-2ea3-4792-a541-26282502b02a" name="mule.key" value="123456" />
+	<configuration-properties doc:name="Configuration properties" doc:id="96c094b3-9534-4a7d-972d-8bdf12ff6c79" file="config/${mule.env}.yaml" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="acee352c-f524-4b53-99b0-4dc5ae940ba9" file="config/${mule.env}.yaml" key="${mule.key}" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="d22dd153-2f11-4444-be2c-b5bbff7a4448" flowRef="pf-router" />
+	
+</mule>

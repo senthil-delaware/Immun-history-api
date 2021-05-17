@@ -1,0 +1,16 @@
+config-filename: "prod.yaml"
+
+api:
+  id: "16806127"
+app:
+  name: "sf-delvax-immunhistory"
+  
+mule:
+  key: "123456"
+  
+delvax:
+  ws:
+    username: "HL7Contact.tracers"
+    password: "![tUoAwxJtd1WrbJjsF/wbvg==]"
+    facilityid: "![h9qFq9mOZUU=]"
+    endpoint: "https://delvax.dhss.delaware.gov/HL7EngineAuthentication/Service.asmx"

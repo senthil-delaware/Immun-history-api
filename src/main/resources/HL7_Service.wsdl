@@ -1,0 +1,405 @@
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://tempuri.org/AbstractTypes" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://tempuri.org/">
+<wsdl:types>
+<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+<s:element name="connectivityTest">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="echoBack" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="connectivityTestResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="connectivityTestResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="submitSingleMessage">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="facilityID" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="flatWire" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="submitSingleMessageResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="submitSingleMessageResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ExecuteHL7Message">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="flatWire" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ExecuteHL7MessageResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ExecuteHL7MessageResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ExecuteHL7MessageByte">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="flatWireByte" type="s:base64Binary"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ExecuteHL7MessageByteResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ExecuteHL7MessageByteResult" type="s:base64Binary"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="string" nillable="true" type="s:string"/>
+<s:element name="base64Binary" nillable="true" type="s:base64Binary"/>
+</s:schema>
+<s:schema targetNamespace="http://tempuri.org/AbstractTypes">
+<s:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+<s:complexType name="StringArray">
+<s:complexContent mixed="false">
+<s:restriction base="soapenc:Array">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string"/>
+</s:sequence>
+</s:restriction>
+</s:complexContent>
+</s:complexType>
+</s:schema>
+</wsdl:types>
+<wsdl:message name="connectivityTestSoapIn">
+<wsdl:part name="parameters" element="tns:connectivityTest"/>
+</wsdl:message>
+<wsdl:message name="connectivityTestSoapOut">
+<wsdl:part name="parameters" element="tns:connectivityTestResponse"/>
+</wsdl:message>
+<wsdl:message name="submitSingleMessageSoapIn">
+<wsdl:part name="parameters" element="tns:submitSingleMessage"/>
+</wsdl:message>
+<wsdl:message name="submitSingleMessageSoapOut">
+<wsdl:part name="parameters" element="tns:submitSingleMessageResponse"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageSoapIn">
+<wsdl:part name="parameters" element="tns:ExecuteHL7Message"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageSoapOut">
+<wsdl:part name="parameters" element="tns:ExecuteHL7MessageResponse"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageByteSoapIn">
+<wsdl:part name="parameters" element="tns:ExecuteHL7MessageByte"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageByteSoapOut">
+<wsdl:part name="parameters" element="tns:ExecuteHL7MessageByteResponse"/>
+</wsdl:message>
+<wsdl:message name="connectivityTestHttpGetIn">
+<wsdl:part name="echoBack" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="connectivityTestHttpGetOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="submitSingleMessageHttpGetIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="facilityID" type="s:string"/>
+<wsdl:part name="flatWire" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="submitSingleMessageHttpGetOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageHttpGetIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="flatWire" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageHttpGetOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageByteHttpGetIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="flatWireByte" type="s1:StringArray"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageByteHttpGetOut">
+<wsdl:part name="Body" element="tns:base64Binary"/>
+</wsdl:message>
+<wsdl:message name="connectivityTestHttpPostIn">
+<wsdl:part name="echoBack" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="connectivityTestHttpPostOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="submitSingleMessageHttpPostIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="facilityID" type="s:string"/>
+<wsdl:part name="flatWire" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="submitSingleMessageHttpPostOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageHttpPostIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="flatWire" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageHttpPostOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageByteHttpPostIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="flatWireByte" type="s1:StringArray"/>
+</wsdl:message>
+<wsdl:message name="ExecuteHL7MessageByteHttpPostOut">
+<wsdl:part name="Body" element="tns:base64Binary"/>
+</wsdl:message>
+<wsdl:portType name="ServiceSoap">
+<wsdl:operation name="connectivityTest">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <br /> <style type="text/css"> table.gridtable { color:#333333; border-width: 1px; border-color: #666666; border-collapse: collapse; } table.gridtable th { font-size:12px; border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #dedede; } table.gridtable td { border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #ffffff; } </style> <h3>Description</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Operation </th> <th> Purpose </th> </tr> <tr> <td> connectivityTest </td> <td> To test connectivity; to verify that the SOAP Web Service is accessible. </td> </tr> </table> <h3>Parameters</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Parameter </th> <th> Input/Output </th> <th> Data type </th> <th> Description </th> </tr> <tr> <td> echoBack </td> <td> Input </td> <td> String </td> <td> Data to be sent back by the connectivity test. </td> </tr> <tr> <td> return </td> <td> Output </td> <td> String </td> <td> Data sent back by the connectivity test. </td> </tr> </table> </wsdl:documentation>
+<wsdl:input message="tns:connectivityTestSoapIn"/>
+<wsdl:output message="tns:connectivityTestSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="submitSingleMessage">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <br /> <style type="text/css"> table.gridtable { color:#333333; border-width: 1px; border-color: #666666; border-collapse: collapse; } table.gridtable th { font-size:12px; border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #dedede; } table.gridtable td { border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #ffffff; } </style> <h3>Description</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Operation </th> <th> Purpose </th> </tr> <tr> <td> submitSingleMessage </td> <td> To submit an HL7 version 2.3.1 or 2.5.1 message to an IIS. </td> </tr> </table> <h3>Parameters</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Parameter </th> <th> Input/Output </th> <th> Data type </th> <th> Description </th> </tr> <tr> <td> username* </td> <td> Input </td> <td> String </td> <td> IIS username </td> </tr> <tr> <td> password* </td> <td> Input </td> <td> String </td> <td> IIS password </td> </tr> <tr> <td> facilityID </td> <td> Input </td> <td> String </td> <td> IIS Facility ID - this field is ignored as it uses the sending facility id field in the HL7 message </td> </tr> <tr> <td> flatWire* </td> <td> Input </td> <td> String </td> <td> HL7 version 2.3.1 or 2.5.1 message intended for IIS </td> </tr> <tr> <td> return </td> <td> Output </td> <td> String </td> <td> HL7 version 2.3.1 or 2.5.1 response from IIS </td> </tr> </table> *indicates required field. <ul> <h3>Notes</h3> <li>Execute an HL7 Message against the registry after confirming that the username and password is a valid HL7 user.</li> <li style='color:red;'>While this method is designed to be able to be consumed by a web form this is not recommended/supported.</li> <li>Please note, the auto-generated textbox for flatWire is not multi-line and therefore will not allow carriage returns to be entered. This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box</li> <li>An HL7 Message in string format will be returned. Errors in the message or the call will be returned within the HL7 message.</li> </ul> </wsdl:documentation>
+<wsdl:input message="tns:submitSingleMessageSoapIn"/>
+<wsdl:output message="tns:submitSingleMessageSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7Message">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <ul> <h3>Description</h3> <li>Execute an HL7 Message against the registry after confirming that the username and password is a valid HL7 user for the Sending Facility.</li> <li style='color:red;'>While this method is designed to be able to be consumed by a web form this is not recommended/supported.</li> <li>Please note, the auto-generated textbox for flatWire is not multi-line and therefore will not allow carriage returns to be entered. This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box</li> <h3>Returns</h3> <li>An HL7 Message in string format will be returned. Errors in the message or the call will be returned within the HL7 message.</li> </ul> </wsdl:documentation>
+<wsdl:input message="tns:ExecuteHL7MessageSoapIn"/>
+<wsdl:output message="tns:ExecuteHL7MessageSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7MessageByte">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <ul> <h3>Description</h3> <li>Execute an HL7 Message against the registry after confirming that the username and password is a valid HL7 user for the Sending Facility.</li> <li>This method is designed to be able to be consumed by a web service.</li> <li>Using Byte allows us to preserve carriage returns as SOAP(XML serialized) forces \r to \n and \r\n to \n</li> <li>Please note, the auto-generated textbox for flatWire is not multi-line and therefore will not allow carriage returns to be entered. This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box</li> <li>To get from string to Byte[] and back again, a call would look like: <br/> <i><font color='green'>string returnHL7 = System.Text.Encoding.UTF8.GetString( webService.ExecuteHL7MessageByte( userName, password, System.Text.Encoding.UTF8.GetBytes( inputHL7 ) ) );</font></i> </li> <h3>Returns</h3> <li>An HL7 Message in Byte[] format will be returned.</li> <li>Errors in the message or the call will be returned within the HL7 message.</li> </ul> </wsdl:documentation>
+<wsdl:input message="tns:ExecuteHL7MessageByteSoapIn"/>
+<wsdl:output message="tns:ExecuteHL7MessageByteSoapOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="ServiceHttpGet">
+<wsdl:operation name="connectivityTest">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <br /> <style type="text/css"> table.gridtable { color:#333333; border-width: 1px; border-color: #666666; border-collapse: collapse; } table.gridtable th { font-size:12px; border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #dedede; } table.gridtable td { border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #ffffff; } </style> <h3>Description</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Operation </th> <th> Purpose </th> </tr> <tr> <td> connectivityTest </td> <td> To test connectivity; to verify that the SOAP Web Service is accessible. </td> </tr> </table> <h3>Parameters</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Parameter </th> <th> Input/Output </th> <th> Data type </th> <th> Description </th> </tr> <tr> <td> echoBack </td> <td> Input </td> <td> String </td> <td> Data to be sent back by the connectivity test. </td> </tr> <tr> <td> return </td> <td> Output </td> <td> String </td> <td> Data sent back by the connectivity test. </td> </tr> </table> </wsdl:documentation>
+<wsdl:input message="tns:connectivityTestHttpGetIn"/>
+<wsdl:output message="tns:connectivityTestHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="submitSingleMessage">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <br /> <style type="text/css"> table.gridtable { color:#333333; border-width: 1px; border-color: #666666; border-collapse: collapse; } table.gridtable th { font-size:12px; border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #dedede; } table.gridtable td { border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #ffffff; } </style> <h3>Description</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Operation </th> <th> Purpose </th> </tr> <tr> <td> submitSingleMessage </td> <td> To submit an HL7 version 2.3.1 or 2.5.1 message to an IIS. </td> </tr> </table> <h3>Parameters</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Parameter </th> <th> Input/Output </th> <th> Data type </th> <th> Description </th> </tr> <tr> <td> username* </td> <td> Input </td> <td> String </td> <td> IIS username </td> </tr> <tr> <td> password* </td> <td> Input </td> <td> String </td> <td> IIS password </td> </tr> <tr> <td> facilityID </td> <td> Input </td> <td> String </td> <td> IIS Facility ID - this field is ignored as it uses the sending facility id field in the HL7 message </td> </tr> <tr> <td> flatWire* </td> <td> Input </td> <td> String </td> <td> HL7 version 2.3.1 or 2.5.1 message intended for IIS </td> </tr> <tr> <td> return </td> <td> Output </td> <td> String </td> <td> HL7 version 2.3.1 or 2.5.1 response from IIS </td> </tr> </table> *indicates required field. <ul> <h3>Notes</h3> <li>Execute an HL7 Message against the registry after confirming that the username and password is a valid HL7 user.</li> <li style='color:red;'>While this method is designed to be able to be consumed by a web form this is not recommended/supported.</li> <li>Please note, the auto-generated textbox for flatWire is not multi-line and therefore will not allow carriage returns to be entered. This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box</li> <li>An HL7 Message in string format will be returned. Errors in the message or the call will be returned within the HL7 message.</li> </ul> </wsdl:documentation>
+<wsdl:input message="tns:submitSingleMessageHttpGetIn"/>
+<wsdl:output message="tns:submitSingleMessageHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7Message">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <ul> <h3>Description</h3> <li>Execute an HL7 Message against the registry after confirming that the username and password is a valid HL7 user for the Sending Facility.</li> <li style='color:red;'>While this method is designed to be able to be consumed by a web form this is not recommended/supported.</li> <li>Please note, the auto-generated textbox for flatWire is not multi-line and therefore will not allow carriage returns to be entered. This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box</li> <h3>Returns</h3> <li>An HL7 Message in string format will be returned. Errors in the message or the call will be returned within the HL7 message.</li> </ul> </wsdl:documentation>
+<wsdl:input message="tns:ExecuteHL7MessageHttpGetIn"/>
+<wsdl:output message="tns:ExecuteHL7MessageHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7MessageByte">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <ul> <h3>Description</h3> <li>Execute an HL7 Message against the registry after confirming that the username and password is a valid HL7 user for the Sending Facility.</li> <li>This method is designed to be able to be consumed by a web service.</li> <li>Using Byte allows us to preserve carriage returns as SOAP(XML serialized) forces \r to \n and \r\n to \n</li> <li>Please note, the auto-generated textbox for flatWire is not multi-line and therefore will not allow carriage returns to be entered. This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box</li> <li>To get from string to Byte[] and back again, a call would look like: <br/> <i><font color='green'>string returnHL7 = System.Text.Encoding.UTF8.GetString( webService.ExecuteHL7MessageByte( userName, password, System.Text.Encoding.UTF8.GetBytes( inputHL7 ) ) );</font></i> </li> <h3>Returns</h3> <li>An HL7 Message in Byte[] format will be returned.</li> <li>Errors in the message or the call will be returned within the HL7 message.</li> </ul> </wsdl:documentation>
+<wsdl:input message="tns:ExecuteHL7MessageByteHttpGetIn"/>
+<wsdl:output message="tns:ExecuteHL7MessageByteHttpGetOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="ServiceHttpPost">
+<wsdl:operation name="connectivityTest">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <br /> <style type="text/css"> table.gridtable { color:#333333; border-width: 1px; border-color: #666666; border-collapse: collapse; } table.gridtable th { font-size:12px; border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #dedede; } table.gridtable td { border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #ffffff; } </style> <h3>Description</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Operation </th> <th> Purpose </th> </tr> <tr> <td> connectivityTest </td> <td> To test connectivity; to verify that the SOAP Web Service is accessible. </td> </tr> </table> <h3>Parameters</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Parameter </th> <th> Input/Output </th> <th> Data type </th> <th> Description </th> </tr> <tr> <td> echoBack </td> <td> Input </td> <td> String </td> <td> Data to be sent back by the connectivity test. </td> </tr> <tr> <td> return </td> <td> Output </td> <td> String </td> <td> Data sent back by the connectivity test. </td> </tr> </table> </wsdl:documentation>
+<wsdl:input message="tns:connectivityTestHttpPostIn"/>
+<wsdl:output message="tns:connectivityTestHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="submitSingleMessage">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <br /> <style type="text/css"> table.gridtable { color:#333333; border-width: 1px; border-color: #666666; border-collapse: collapse; } table.gridtable th { font-size:12px; border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #dedede; } table.gridtable td { border-width: 1px; padding: 8px; border-style: solid; border-color: #666666; background-color: #ffffff; } </style> <h3>Description</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Operation </th> <th> Purpose </th> </tr> <tr> <td> submitSingleMessage </td> <td> To submit an HL7 version 2.3.1 or 2.5.1 message to an IIS. </td> </tr> </table> <h3>Parameters</h3> <table class="gridtable" style="width:575px;"> <tr> <th> Parameter </th> <th> Input/Output </th> <th> Data type </th> <th> Description </th> </tr> <tr> <td> username* </td> <td> Input </td> <td> String </td> <td> IIS username </td> </tr> <tr> <td> password* </td> <td> Input </td> <td> String </td> <td> IIS password </td> </tr> <tr> <td> facilityID </td> <td> Input </td> <td> String </td> <td> IIS Facility ID - this field is ignored as it uses the sending facility id field in the HL7 message </td> </tr> <tr> <td> flatWire* </td> <td> Input </td> <td> String </td> <td> HL7 version 2.3.1 or 2.5.1 message intended for IIS </td> </tr> <tr> <td> return </td> <td> Output </td> <td> String </td> <td> HL7 version 2.3.1 or 2.5.1 response from IIS </td> </tr> </table> *indicates required field. <ul> <h3>Notes</h3> <li>Execute an HL7 Message against the registry after confirming that the username and password is a valid HL7 user.</li> <li style='color:red;'>While this method is designed to be able to be consumed by a web form this is not recommended/supported.</li> <li>Please note, the auto-generated textbox for flatWire is not multi-line and therefore will not allow carriage returns to be entered. This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box</li> <li>An HL7 Message in string format will be returned. Errors in the message or the call will be returned within the HL7 message.</li> </ul> </wsdl:documentation>
+<wsdl:input message="tns:submitSingleMessageHttpPostIn"/>
+<wsdl:output message="tns:submitSingleMessageHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7Message">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <ul> <h3>Description</h3> <li>Execute an HL7 Message against the registry after confirming that the username and password is a valid HL7 user for the Sending Facility.</li> <li style='color:red;'>While this method is designed to be able to be consumed by a web form this is not recommended/supported.</li> <li>Please note, the auto-generated textbox for flatWire is not multi-line and therefore will not allow carriage returns to be entered. This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box</li> <h3>Returns</h3> <li>An HL7 Message in string format will be returned. Errors in the message or the call will be returned within the HL7 message.</li> </ul> </wsdl:documentation>
+<wsdl:input message="tns:ExecuteHL7MessageHttpPostIn"/>
+<wsdl:output message="tns:ExecuteHL7MessageHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7MessageByte">
+<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"> <ul> <h3>Description</h3> <li>Execute an HL7 Message against the registry after confirming that the username and password is a valid HL7 user for the Sending Facility.</li> <li>This method is designed to be able to be consumed by a web service.</li> <li>Using Byte allows us to preserve carriage returns as SOAP(XML serialized) forces \r to \n and \r\n to \n</li> <li>Please note, the auto-generated textbox for flatWire is not multi-line and therefore will not allow carriage returns to be entered. This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box This prevents you from being able to send in a valid HL7 message. Therefore it must be consumed by a form with a text area box</li> <li>To get from string to Byte[] and back again, a call would look like: <br/> <i><font color='green'>string returnHL7 = System.Text.Encoding.UTF8.GetString( webService.ExecuteHL7MessageByte( userName, password, System.Text.Encoding.UTF8.GetBytes( inputHL7 ) ) );</font></i> </li> <h3>Returns</h3> <li>An HL7 Message in Byte[] format will be returned.</li> <li>Errors in the message or the call will be returned within the HL7 message.</li> </ul> </wsdl:documentation>
+<wsdl:input message="tns:ExecuteHL7MessageByteHttpPostIn"/>
+<wsdl:output message="tns:ExecuteHL7MessageByteHttpPostOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="connectivityTest">
+<soap:operation soapAction="http://tempuri.org/connectivityTest" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="submitSingleMessage">
+<soap:operation soapAction="http://tempuri.org/submitSingleMessage" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7Message">
+<soap:operation soapAction="http://tempuri.org/ExecuteHL7Message" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7MessageByte">
+<soap:operation soapAction="http://tempuri.org/ExecuteHL7MessageByte" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="connectivityTest">
+<soap12:operation soapAction="http://tempuri.org/connectivityTest" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="submitSingleMessage">
+<soap12:operation soapAction="http://tempuri.org/submitSingleMessage" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7Message">
+<soap12:operation soapAction="http://tempuri.org/ExecuteHL7Message" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7MessageByte">
+<soap12:operation soapAction="http://tempuri.org/ExecuteHL7MessageByte" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="ServiceHttpGet" type="tns:ServiceHttpGet">
+<http:binding verb="GET"/>
+<wsdl:operation name="connectivityTest">
+<http:operation location="/connectivityTest"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="submitSingleMessage">
+<http:operation location="/submitSingleMessage"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7Message">
+<http:operation location="/ExecuteHL7Message"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7MessageByte">
+<http:operation location="/ExecuteHL7MessageByte"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="ServiceHttpPost" type="tns:ServiceHttpPost">
+<http:binding verb="POST"/>
+<wsdl:operation name="connectivityTest">
+<http:operation location="/connectivityTest"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="submitSingleMessage">
+<http:operation location="/submitSingleMessage"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7Message">
+<http:operation location="/ExecuteHL7Message"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ExecuteHL7MessageByte">
+<http:operation location="/ExecuteHL7MessageByte"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="Service">
+<wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+<soap:address location="https://delvax-qa.dhss.delaware.gov/HL7EngineAuthentication_QA/Service.asmx"/>
+</wsdl:port>
+<wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+<soap12:address location="https://delvax-qa.dhss.delaware.gov/HL7EngineAuthentication_QA/Service.asmx"/>
+</wsdl:port>
+<wsdl:port name="ServiceHttpGet" binding="tns:ServiceHttpGet">
+<http:address location="https://delvax-qa.dhss.delaware.gov/HL7EngineAuthentication_QA/Service.asmx"/>
+</wsdl:port>
+<wsdl:port name="ServiceHttpPost" binding="tns:ServiceHttpPost">
+<http:address location="https://delvax-qa.dhss.delaware.gov/HL7EngineAuthentication_QA/Service.asmx"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
